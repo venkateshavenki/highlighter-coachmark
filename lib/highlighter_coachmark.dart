@@ -44,7 +44,7 @@ import 'dart:ui' as ui;
 ///      });
 /// ```
 class CoachMark {
-  CoachMark({this.bgColor = const Color(0xB2212121)});
+  CoachMark({this.bgColor = const Color.fromRGBO(117, 128, 149, 0.45)});
 
   /// Global key to get an access for CoachMark's State
   GlobalKey<_HighlighterCoachMarkState> globalKey;
@@ -105,13 +105,13 @@ class CoachMark {
     _overlayEntryBackground = _overlayEntryBackground ??
         new OverlayEntry(
           builder: (BuildContext context) => new _HighlighterCoachMarkWidget(
-                key: globalKey,
-                bgColor: bgColor,
-                markRect: markRect,
-                markShape: markShape,
-                doClose: close,
-                children: children,
-              ),
+            key: globalKey,
+            bgColor: bgColor,
+            markRect: markRect,
+            markShape: markShape,
+            doClose: close,
+            children: children,
+          ),
         );
 
     OverlayState overlayState = Overlay.of(targetContext);
@@ -221,9 +221,6 @@ class _HighlighterCoachMarkState extends State<_HighlighterCoachMarkWidget>
                   filter: ui.ImageFilter.blur(
                       sigmaX: _blurAnimation.value,
                       sigmaY: _blurAnimation.value),
-                  child: Container(
-                    color: Colors.transparent,
-                  ),
                 ),
               ),
               _CoachMarkLayer(
@@ -245,9 +242,9 @@ class _HighlighterCoachMarkState extends State<_HighlighterCoachMarkWidget>
                   painter: _CoachMarkPainter(
                     rect: position,
                     shadow: BoxShadow(
-                        color:
-                            widget.bgColor.withOpacity(_opacityAnimation.value),
-                        blurRadius: 8.0),
+                      color:
+                      widget.bgColor.withOpacity(_opacityAnimation.value),
+                    ),
                     clipper: clipper,
                     coachMarkShape: widget.markShape,
                   ),
@@ -268,20 +265,20 @@ class _HighlighterCoachMarkState extends State<_HighlighterCoachMarkWidget>
 class _CoachMarkLayer extends Listener {
   const _CoachMarkLayer(
       {Key key,
-      onPointerDown,
-      onPointerMove,
-      onPointerUp,
-      onPointerCancel,
-      behavior,
-      this.markPosition,
-      Widget child})
+        onPointerDown,
+        onPointerMove,
+        onPointerUp,
+        onPointerCancel,
+        behavior,
+        this.markPosition,
+        Widget child})
       : super(
-            key: key,
-            onPointerDown: onPointerDown,
-            onPointerMove: onPointerMove,
-            onPointerUp: onPointerUp,
-            onPointerCancel: onPointerCancel,
-            child: child);
+      key: key,
+      onPointerDown: onPointerDown,
+      onPointerMove: onPointerMove,
+      onPointerUp: onPointerUp,
+      onPointerCancel: onPointerCancel,
+      child: child);
 
   final Rect markPosition;
 
@@ -316,19 +313,19 @@ class _CoachMarkLayer extends Listener {
 class _RenderPointerListenerWithExceptRegion extends RenderPointerListener {
   _RenderPointerListenerWithExceptRegion(
       {onPointerDown,
-      onPointerMove,
-      onPointerUp,
-      onPointerCancel,
-      HitTestBehavior behavior,
-      this.exceptRegion,
-      RenderBox child})
+        onPointerMove,
+        onPointerUp,
+        onPointerCancel,
+        HitTestBehavior behavior,
+        this.exceptRegion,
+        RenderBox child})
       : super(
-            onPointerDown: onPointerDown,
-            onPointerMove: onPointerMove,
-            onPointerUp: onPointerUp,
-            onPointerCancel: onPointerCancel,
-            behavior: behavior,
-            child: child);
+      onPointerDown: onPointerDown,
+      onPointerMove: onPointerMove,
+      onPointerUp: onPointerUp,
+      onPointerCancel: onPointerCancel,
+      behavior: behavior,
+      child: child);
 
   final Rect exceptRegion;
 
